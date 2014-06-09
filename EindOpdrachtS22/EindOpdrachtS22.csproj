@@ -100,6 +100,10 @@
     <Content Include="CSS\StartCSS.css" />
     <Content Include="CSS\CreateCSS.css" />
     <Content Include="CSS\ViewCSS.css" />
+    <Content Include="Tests\Comment.aspx" />
+    <Content Include="Tests\Load.aspx" />
+    <Content Include="Tests\StartTest.aspx" />
+    <Content Include="Tests\SelectCSS.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +142,34 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\Comment.aspx.cs">
+      <DependentUpon>Comment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tests\Comment.aspx.designer.cs">
+      <DependentUpon>Comment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\Load.aspx.cs">
+      <DependentUpon>Load.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tests\Load.aspx.designer.cs">
+      <DependentUpon>Load.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\StartTest.aspx.cs">
+      <DependentUpon>StartTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tests\StartTest.aspx.designer.cs">
+      <DependentUpon>StartTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\SelectCSS.aspx.cs">
+      <DependentUpon>SelectCSS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tests\SelectCSS.aspx.designer.cs">
+      <DependentUpon>SelectCSS.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
