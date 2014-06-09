@@ -1,0 +1,52 @@
+﻿body {
+}
+
+#txtBuildName
+{
+    margin-left:20px;
+}
+
+#txtBuildAuthor
+{
+    margin-left:16px;
+}
+
+#img15
+{
+    margin-left:20px;
+}
+#img30
+{
+    margin-left:20px;
+}
+#img45
+{
+    margin-left:20px;
+}
+#img60
+{
+    margin-left:20px;
+}
+#img75
+{
+    margin-left:20px;
+}
+#img90
+{
+    margin-left:20px;
+}
+
+#pnlBuild
+{
+    text-align:center;
+}
+
+#btnBack
+{
+    margin-left:20px;
+}
+
+#btnSave
+{
+    margin-left:120px;
+}

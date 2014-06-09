@@ -1,0 +1,18 @@
+﻿body {
+}
+
+#divStart
+{
+    text-align:center;
+}
+
+#btnStartNew
+{
+    margin-bottom:20px;
+    margin-top:20px;
+}
+
+#btnStartLoad
+{
+    margin-left:20px;
+}
