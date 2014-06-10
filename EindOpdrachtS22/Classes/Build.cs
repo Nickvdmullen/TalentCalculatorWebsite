@@ -7,19 +7,24 @@
 
     public class Build
     {
+        // creates an instance of the DBControl class ----------------------------------------------------------------------
         Classes.DBControl Database = new Classes.DBControl();
 
+        // public attributes -----------------------------------------------------------------------------------------------
         public string BuildName { get; private set; }
         public string Author { get; private set; }
         public string SelectedClass { get; private set; }
         public string SelectedSpec { get; private set; }
         public List<string> SelectedSpells { get; private set; }
 
+
+        // Constructor of this class ---------------------------------------------------------------------------------------
         public Build()
         {
             SelectedSpells = new List<string>();
         }
 
+        // A method that returns the data that is currently in this instance -----------------------------------------------
         public List<string> UpdateBuild()
         {
             List<string> returnBuild = new List<string>();
@@ -29,16 +34,21 @@
             return returnBuild;
         }
 
+
+        // A method for adding a selection to this instance -----------------------------------------------------------------
         public void AddClass(string name)
         {
             this.SelectedClass = name;
         }
 
+        // A method for adding a selection to this instance -----------------------------------------------------------------
         public void AddSpec(string Spec)
         {
             this.SelectedSpec = Spec;
         }
 
+        // A method for adding a spell and puts it in the correct position in the list  --------------------------------------
+        // There is a 0 for security so it doesn't give a null error when run for the first time -----------------------------
         public void AddSpell(string spell, int position)
         {
             switch(position)
@@ -64,6 +74,7 @@
             }
        }
 
+        // A method that resets this instance --------------------------------------------------------------------------------
         public void ResetBuild()
         {
             this.SelectedClass = "";
@@ -72,11 +83,14 @@
             this.SelectedSpells.Add("");
         }
 
+        // A method that adds Buildname and the author's name to the instance ------------------------------------------------
         public void AddNames(string name,string author)
         {
             this.BuildName = name;
             this.Author = author;
         }
+
+        // A method that save this instance to the database ------------------------------------------------------------------
         public void SaveBuild()
         {
             Database.SaveBuild(this);

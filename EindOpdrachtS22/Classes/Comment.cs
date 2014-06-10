@@ -7,19 +7,24 @@
     
     public class Comment
     {
+        // Creates an instance of the class DBControl --------------------------------------------------------------------
+        DBControl database = new DBControl();
+
+        //Public attributes of this class --------------------------------------------------------------------------------
         public string CommentID { get; set; }
         public string BuildName { get; set; }
-        public string Comments { get; set; }
+        public string Comments  { get; set; }
         
-
+        //The constructor of this class ----------------------------------------------------------------------------------
         public Comment()
         {
-            
+
         }
 
-        private void SendComment()
+        // A method for sending the comment to the database --------------------------------------------------------------
+        private void SendComment(string id,string buildname ,string comment)
         {
-            // Send insert to Database;
+            database.addComment(id, buildname, comment);
         }
 
     }

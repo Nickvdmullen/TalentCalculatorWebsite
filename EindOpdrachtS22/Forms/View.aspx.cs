@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using EindopdrachtS22.Classes;
-using System.Drawing;
-
-namespace EindOpdrachtS22.Forms
+﻿namespace EindOpdrachtS22.Forms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+    using EindopdrachtS22.Classes;
+    using System.Drawing;
     public partial class View : System.Web.UI.Page
     {
+
+        // Creates an instance of the class DBControl,Build and properties -----------------------------------------------
         DBControl database = new DBControl();
         List<String> Build = new List<string>();
         Build myBuild = new Build();
         string BuildName;
+
+        //Page_load event that gets the buildname from the URL, then gets the information from database, fill the page ---
+        //from the data received from database, and sets the datasource of the gridview ----------------------------------
         protected void Page_Load(object sender, EventArgs e)
         {
             BuildName = Request.QueryString["name"];
@@ -25,13 +29,16 @@ namespace EindOpdrachtS22.Forms
             GridView1.DataBind();
         }
 
+        // Sets the datasource for the gridview and binds it -------------------------------------------------------------
         protected void pnlViewBuild_PreRender(object sender,EventArgs e)
         {
             GridView1.DataSource = database.GetDataSource(myBuild.BuildName);
             GridView1.DataBind();
         }
 
-
+        // A method that rebuilds the page from the data gotten out of the session, it resets the colors of the borders to  -
+        // black, then goes through the list<string> and changes the color of the bordercolor to lime for each item in the  -
+        // list. ------------------------------------------------------------------------------------------------------------
         private void FillPage()
         {
                 foreach (string choice in Build)
@@ -121,8 +128,10 @@ namespace EindOpdrachtS22.Forms
                     }
                 }
             }
-        
 
+        // A method that rebuilds the page from the data gotten out of the session, it resets the colors of the borders to  ----
+        // black, then goes through the list<string> and changes the color of the bordercolor to lime for each item in the  ----
+        // list. ---------------------------------------------------------------------------------------------------------------
         private void Check()
         {
             int counter = 0;
@@ -147,6 +156,7 @@ namespace EindOpdrachtS22.Forms
                 }
             }
 
+        // A button that resets the instance of build and clears the session, then redirects you back to start.aspx ------------
         protected void btnViewBack_Click(object sender, EventArgs e)
         {
             myBuild.ResetBuild();

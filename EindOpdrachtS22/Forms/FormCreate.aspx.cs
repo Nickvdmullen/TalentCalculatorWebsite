@@ -1,22 +1,28 @@
-﻿using EindopdrachtS22.Classes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-namespace EindOpdrachtS22.Forms
+﻿namespace EindOpdrachtS22.Forms
 {
+    using EindopdrachtS22.Classes;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Web;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+
     public partial class FormCreate : System.Web.UI.Page
     {
+        // Creates and instance of build ---------------------------------------------------------------------------------
         Build myBuild = new Build();
 
+        // Loads pages ---------------------------------------------------------------------------------------------------
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+        // All buttons named ibtnName create an instance of the class Class, get the tooltips from the database, adds the -
+        // selection to the instance of Build, adds it in the session and as last point triggers the method for rebuilding-
+        // the page with the new changes made -----------------------------------------------------------------------------
 
         protected void ibtnDeathKnight_Click(object sender, ImageClickEventArgs e)
         {
@@ -127,6 +133,8 @@ namespace EindOpdrachtS22.Forms
             Session.Add("Build", myBuild.UpdateBuild());
             FillPage();
         }
+        // All buttons named ibtnSpec use the method Check, add the selected spec to the instance of Build,adds it to the-------
+        // session, and calls the method that rebuilds the webpage with changes made. ------------------------------------------
 
         protected void ibtnSpec1_Click(object sender, ImageClickEventArgs e)
         {
@@ -152,6 +160,10 @@ namespace EindOpdrachtS22.Forms
             FillPage();
         }
 
+
+        // All buttons below here that have the name ibtnSpell# calls the method check, adds de selected spell to the instance -
+        // from Build at the correct position,adds it to the session and calls the method to rebuild the pages with the new    -
+        // changes. ------------------------------------------------------------------------------------------------------------
         protected void ibtnSpell1_Click(object sender, ImageClickEventArgs e)
         {
             Check();
@@ -296,6 +308,8 @@ namespace EindOpdrachtS22.Forms
             Session.Add("Build", myBuild.UpdateBuild()); ;
             FillPage();
         }
+
+        // Gets a string[] and sets the tooltips of the specbuttons to the text within the array. ------------------------------
         private void SetToolTips(string[] specs)
         {
             ibtnSpec1.ToolTip = specs[0];
@@ -303,6 +317,8 @@ namespace EindOpdrachtS22.Forms
             ibtnSpec3.ToolTip = specs[2];
         }
 
+
+        // A method that checks session that the instance of Build has the correct spec loaded in it ---------------------------
         private void Check()
         {
             if (Session["Build"] != null)
@@ -330,6 +346,9 @@ namespace EindOpdrachtS22.Forms
             }
         }
 
+        // A method that rebuilds the page from the data gotten out of the session, it resets the colors of the borders to  ----
+        // black, then goes through the list<string> and changes the color of the bordercolor to lime for each item in the  ----
+        // list. ---------------------------------------------------------------------------------------------------------------
         private void FillPage()
         {
 
@@ -466,6 +485,8 @@ namespace EindOpdrachtS22.Forms
             }
         }
 
+        // A button that adds the Buildname and authorsname to the instance of Build and saves the build you made to the    ----
+        // database ------------------------------------------------------------------------------------------------------------
         protected void btnSave_Click(object sender, EventArgs e)
         {
             myBuild.AddNames(txtBuildName.Text, txtBuildAuthor.Text);
@@ -473,6 +494,8 @@ namespace EindOpdrachtS22.Forms
             myBuild.SaveBuild();
         }
 
+
+        // A button that resets Build, empties the session and returns you to the form Start.aspx ------------------------------
         protected void btnBack_Click(object sender, EventArgs e)
         {
             myBuild.ResetBuild();

@@ -7,10 +7,11 @@
     using System.Data.OleDb;
 
     public class DBControl
-    {
+    { 
         private OleDbConnection connection;
         private string accesconnectionstring;
 
+        // Constructor of DBControl, sets pad,provider and application path ----------------------------------------------------
         public DBControl()
         {
             string pad;
@@ -20,7 +21,8 @@
 
             provider = "Provider=Microsoft.ACE.OLEDB.12.0";
 
-            applicatiepad = HttpContext.Current.Request.PhysicalApplicationPath.Substring(0, HttpContext.Current.Request.PhysicalApplicationPath.LastIndexOf("\\"));
+            applicatiepad = HttpContext.Current.Request.PhysicalApplicationPath.Substring(0, 
+                HttpContext.Current.Request.PhysicalApplicationPath.LastIndexOf("\\"));
 
             pad = "Data Source=" + applicatiepad + "\\DataBase11.accdb";
 
@@ -29,6 +31,7 @@
             connection = new OleDbConnection(accesconnectionstring);
         }
 
+        // A method that opens the database connection, gives an error message when it fails -----------------------------------
         public void Open()
         {
             try
@@ -42,6 +45,7 @@
 
         }
 
+        // A method that closes the database connection, gives an error message when it fails ----------------------------------
         public void Close()
         {
             try
@@ -54,6 +58,7 @@
             }
         }
 
+        // A method that gets builds from the database and returns them to a List<string> -----------------------------------------
         public List<string> GetBuilds()
         {
             Open();
@@ -79,6 +84,7 @@
             return ReceivedBuilds;
         }
 
+        // A method that gets the informations from given build and returns them to a List<string> --------------------------------
         public List<string> GetBuild(string BuildName)
         {
             Open();
@@ -111,6 +117,7 @@
         }
 
 
+        // A method that gets the Specialization tooltips of the given class and returns them to a List<string> -------------------
         public List<string> GetToolTips(Class Class)
         {
             Open();
@@ -136,6 +143,7 @@
             return mytooltips;
         }
 
+        // A method that gets the Class Tooltip of given Class  and returns it as a string -------------------------------------
         public string GetToolTip(Class Class)
         {
             Open();
@@ -159,6 +167,7 @@
             return Tooltip;
         }
 
+        // A method that gets the 3 tooltips of the specialization of the given class and returns it as a string[] -------------
         public string[] GetSpecialization(Class Class)
         {
             Open();
@@ -195,6 +204,7 @@
             return mySpecs;
         }
 
+        // A method that saves the information of Build into the database ------------------------------------------------------
         public void SaveBuild(Build build)
         {
             Open();
@@ -240,20 +250,6 @@
             try
             {
                 OleDbConnection myconnection = new OleDbConnection(accesconnectionstring);
-                /*Command.Parameters.AddWithValue("@BuildName", Buildname);
-                Command.Parameters.AddWithValue("@BuildAuthor", Author);
-                Command.Parameters.AddWithValue("@Class", Class);
-                Command.Parameters.AddWithValue("@Spec", Spec);
-                Command.Parameters.AddWithValue("@Spell1", Spell1);
-                Command.Parameters.AddWithValue("@Spell2", Spell2);
-                Command.Parameters.AddWithValue("@Spell3", Spell3);
-                Command.Parameters.AddWithValue("@Spell4", Spell4);
-                Command.Parameters.AddWithValue("@Spell5", Spell5);
-                Command.Parameters.AddWithValue("@Spell6", Spell6);
-
-                Command.Connection = connection;
-                Command.ExecuteNonQuery();*/
-
                 OleDbCommand Command = myconnection.CreateCommand();
                 myconnection.Open();
                 Command.CommandText = "INSERT INTO Build ([BuildName],[Author],[Class],[Spec],[Spell1],[Spell2],[Spell3],[Spell4],[Spell5],[Spell6])" +
@@ -267,6 +263,7 @@
             Close();
         }
 
+        // A method that gets the datasource of the given buildname ------------------------------------------------------------
         public List<Comment> GetDataSource(string BuildName)
         {
             Open();
@@ -285,6 +282,26 @@
                     MyComments.Add(newComment);
                 }
                 return MyComments;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+
+        // A method that adds a comment to the database ------------------------------------------------------------------------
+        public void addComment(string id,string buildname,string comment)
+        {
+            Open();
+            string sql = "INSERT INTO COMMENT VALUES ('" + id+"',"+"'"+ buildname+"',"+"'"+comment + "')";
+            OleDbCommand command = new OleDbCommand(sql, connection);
+            try
+            {
+                command.ExecuteNonQuery();
             }
             catch
             {
